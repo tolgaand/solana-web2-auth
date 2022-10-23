@@ -80,15 +80,17 @@ ${STATEMENT}
   tx.feePayer = pk;
   tx.recentBlockhash = Keypair.generate().publicKey.toString();
 
-  return c.text(
-    tx.serialize({ requireAllSignatures: false }).toString("base64")
-  );
+  return c.json({
+    unsignedTransaction: tx
+      .serialize({ requireAllSignatures: false })
+      .toString("base64"),
+  });
 });
 
 app.post("/:publicKey", async (c) => {
   const publicKey = new PublicKey(c.req.param("publicKey"));
   const tx = Transaction.from(Buffer.from(await c.req.text(), "base64"));
-  return c.json(await validateAuthTx(tx, publicKey));
+  return c.json({ ok: await validateAuthTx(tx, publicKey) });
 });
 
 app.get("/:publicKey/deposit/:amount", async (c) => {
