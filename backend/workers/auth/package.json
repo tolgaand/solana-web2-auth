@@ -1,0 +1,22 @@
+{
+  "name": "auth-worker",
+  "version": "1.1.0",
+  "description": "",
+  "main": "./src/index.ts",
+  "scripts": {
+    "dev": "wrangler dev --local",
+    "publish": "wrangler publish ./src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@solana/web3.js": "^1.66.0",
+    "bs58": "^5.0.0",
+    "hono": "^2.2.5"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^3.17.0",
+    "wrangler": "^2.1.11"
+  }
+}
